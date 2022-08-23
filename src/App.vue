@@ -1,15 +1,18 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+  <h1>Bobrov<img src="./assets/logo.png">ladislav</h1>
+  <Calculator></Calculator>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Calculator from "@/components/Calculator";
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld
+    Calculator
   }
 }
 </script>
@@ -22,5 +25,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+h1{
+  font-size: 3em;
+}
+
+img{
+  padding-left: 35px;
+  max-width: 50px;
+  max-height: 80px;
+  height: 65px;
 }
 </style>
