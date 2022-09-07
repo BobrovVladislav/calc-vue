@@ -15,6 +15,8 @@ import Display from "@/components/Display";
 import Button from "@/components/Button";
 
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'calculator',
   data: function () {
     return {
       dispValue: "0",
@@ -28,7 +30,6 @@ export default {
 
       prevValue: "0",
       prevOp: "=",
-
 
       buttons: [
         {
@@ -189,75 +190,25 @@ methods: {
         alert("KEY ERROR: in default");
     }
   },
-  negateValue: function(){
-    if (this.dispValue != "0"){
-      if (this.dispValue.indexOf("-") < 0){
-        this.dispValue = "-" + this.dispValue;
-      }
-      else{
-        this.dispValue = this.dispValue.substring(1);
-      }
-    }
-
-  },
-  addPoint: function() {
-    if (this.dispValue.indexOf(".") < 0){
-      this.dispValue += "."
-    }
-  },
-  equalPressed: function(){
-    try{
-      this.computeEqual(this.prevValue, this.dispValue, this.prevOp);
-      this.subDispValue = "";
-    }
-    catch (e){
-      alert(e);
-    }
-  },
-  numberPressed: function(number){
-    this.opInEffect = false;
-    if (this.dispValue === "0"){
+  numberPressed: function(number) {
+    if (this.dispValue === "0") {
       this.dispValue = number;
     }
     else {
-      if (this.dispValue.length >= 15){
+      if (this.dispValue.length >= 15) {
         alert("KEY ERROR: Display limit reached");
-      }
-      else{
+      } else {
         this.dispValue += number;
-      }
 
+      }
     }
-
   },
-  computePlus: function (){
-    this.dispValue = this.computeOps(this.prevValue, this.dispValue, "+")
-  },
-  computeSub: function (){
-    this.dispValue = this.computeOps(this.prevValue, this.dispValue, "-")
-  },
-  computeDiv: function (){
-    this.dispValue = this.computeOps(this.prevValue, this.dispValue, "/")
-  },
-  computeMult: function (){
-    this.dispValue = this.computeOps(this.prevValue, this.dispValue, "x")
-  },
-  computeOp: function (op){
-    if (!this.opInEffect){
-      try{
-        this.computeEqual(this.prevValue, this.dispValue, this.prevOp);
-        this.prevValue = this.dispValue;
-        this.dispValue = "0";
-        this.prevOp = op;
-        this.subDispValue = this.prevValue.toString() + " " + this.prevOp + "    ";
-        this.opInEffect = true;
-      }
-      catch (e){
-        alert(e);
-      }
-
-    }
-
+  computeOp: function (op) {
+    this.computeEqual(this.prevValue, this.dispValue, this.prevOp)
+    this.prevValue = this.dispValue;
+    this.dispValue = "0";
+    this.prevOp=op;
+    this.subDispValue = this.prevValue.toString() + " " + this.prevOp + "    ";
   },
   computeEqual: function(op1, op2, op){
     let op1_num = parseFloat(op1);
@@ -291,7 +242,15 @@ methods: {
     this.dispValue = temp;
     this.prevValue = "0";
     this.prevOp = "=";
-
+  },
+  equalPressed: function(){
+    try{
+      this.computeEqual(this.prevValue, this.dispValue, this.prevOp);
+      this.subDispValue = "";
+    }
+    catch (e){
+      alert(e);
+    }
   },
   clearDisplay: function (){
     this.dispValue = "0";
@@ -301,8 +260,23 @@ methods: {
     this.prevValue = "0";
     this.prevOp = "=";
     this.subDispValue ="";
-    this.opInEffect = false;
-  }
+  },
+  negateValue: function(){
+    if (this.dispValue != "0"){
+      if (this.dispValue.indexOf("-") < 0){
+        this.dispValue = "-" + this.dispValue;
+      }
+      else{
+        this.dispValue = this.dispValue.substring(1);
+      }
+    }
+
+  },
+  addPoint: function() {
+    if (this.dispValue.indexOf(".") < 0){
+      this.dispValue += "."
+    }
+  },
 }
 }
 </script>

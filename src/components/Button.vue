@@ -1,6 +1,7 @@
 <template>
   <div id="vue-button">
     <button class="calc-button"
+            v-on:click=buttonPressed
             v-bind:class="{numberButton: buttonValues.isNum, symbolButton: buttonValues.isSym}">
             {{buttonValues.name}}
     </button>
@@ -9,10 +10,16 @@
 
 <script>
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
   name: 'vuebutton',
   props: {
     buttonValues: Object
 },
+  methods:{
+    buttonPressed: function (event){
+this.$emit ('handle-press', event.target)
+    }
+  }
 }
 </script>
 
